@@ -1,0 +1,286 @@
+ <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Celular da Pietra</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="celular">
+
+    <!-- 1. Tela de Bloqueio -->
+    <div id="tela-bloqueio" class="tela">
+      <div class="relogio">
+        <p class="data">Quinta-feira, 19 de Novembro</p>
+        <h1 class="hora">03:00</h1>
+      </div>
+
+      <!-- Player estilo iPhone na Tela de Bloqueio -->
+      <div class="player-bloqueio">
+        <div class="player-topo">
+          <img src="./images/capa-musica.jpg" alt="Capa do álbum" class="player-capa">
+          <div class="player-info">
+            <span class="player-musica">The Red Means I Love You</span>
+            <span class="player-artista">Madds Buckley</span>
+          </div>
+          <span class="player-onda">ılılı</span>
+        </div>
+
+        <div class="player-progresso">
+          <span class="tempo">1:14</span>
+          <div class="barra-fundo">
+            <div class="barra-preenchida"></div>
+          </div>
+          <span class="tempo">-2:08</span>
+        </div>
+
+        <div class="player-controles">
+          <button type="button" class="btn-player" title="Anterior">⏮</button>
+          <button type="button" id="btn-play-pause" class="btn-player btn-play" title="Pausar/Tocar">⏸</button>
+          <button type="button" class="btn-player" title="Próxima">⏭</button>
+        </div>
+      </div>
+
+      <button type="button" id="btn-ir-senha" class="btn-vidro">Desbloquear com senha</button>
+    </div>
+
+    <!-- 2. Tela de Senha -->
+    <div id="tela-senha" class="tela escondida">
+      <div class="topo-senha">
+        <p class="titulo-senha">Digite a senha</p>
+        <div id="visor-senha" class="visor-senha">
+          <span class="ponto"></span>
+          <span class="ponto"></span>
+          <span class="ponto"></span>
+          <span class="ponto"></span>
+        </div>
+        <p id="mensagem-senha" class="mensagem-senha"></p>
+      </div>
+
+      <div class="teclado-senha">
+        <button type="button" class="tecla-num" data-num="1">1</button>
+        <button type="button" class="tecla-num" data-num="2">2</button>
+        <button type="button" class="tecla-num" data-num="3">3</button>
+        <button type="button" class="tecla-num" data-num="4">4</button>
+        <button type="button" class="tecla-num" data-num="5">5</button>
+        <button type="button" class="tecla-num" data-num="6">6</button>
+        <button type="button" class="tecla-num" data-num="7">7</button>
+        <button type="button" class="tecla-num" data-num="8">8</button>
+        <button type="button" class="tecla-num" data-num="9">9</button>
+        <button type="button" id="btn-voltar-bloqueio" class="tecla-acao">Voltar</button>
+        <button type="button" class="tecla-num" data-num="0">0</button>
+        <button type="button" id="btn-apagar-senha" class="tecla-acao">⌫</button>
+      </div>
+    </div>
+
+    <!-- Tela de Ligação Recebida / Em Andamento -->
+    <div id="tela-ligacao" class="tela escondida">
+      <div class="ligacao-info">
+        <span id="ligacao-status" class="ligacao-status">Ligação recebida...</span>
+        <img src="./images/contato-ligacao.jpg" alt="Foto do contato" class="ligacao-foto">
+        <h2 class="ligacao-nome">Pedro Henrique</h2>
+        <span class="ligacao-sub">Celular</span>
+      </div>
+
+      <div class="ligacao-acoes">
+        <button type="button" id="btn-desligar" class="btn-chamada btn-vermelho" title="Desligar">
+          📞
+        </button>
+
+        <button type="button" id="btn-atender" class="btn-chamada btn-verde" title="Atender">
+          📞
+        </button>
+      </div>
+
+      <audio id="audio-toque" src="./audios/toque.mp3" loop></audio>
+      <audio id="audio-voz" src="./audios/ligacao.mp3"></audio>
+    </div>
+
+    <!-- 3. Tela Inicial -->
+    <div id="tela-inicial" class="tela escondida">
+      <div class="grade-apps">
+        <button type="button" class="app-icone" data-app="whatsapp">
+          <img src="./images/whatsapp.jpg" alt="WhatsApp" class="icone-img">
+          <span class="app-nome">WhatsApp</span>
+        </button>
+
+        <button type="button" class="app-icone" data-app="instagram">
+          <img src="./images/instagram.jpg" alt="Instagram" class="icone-img">
+          <span class="app-nome">Instagram</span>
+        </button>
+
+        <button type="button" class="app-icone" data-app="notas">
+          <img src="./images/notas.jpg" alt="Notas" class="icone-img">
+          <span class="app-nome">Notas</span>
+        </button>
+
+        <button type="button" class="app-icone" data-app="chrome">
+          <img src="./images/chrome.jpg" alt="Chrome" class="icone-img">
+          <span class="app-nome">Chrome</span>
+        </button>
+
+        <button type="button" class="app-icone" data-app="nao-abrir">
+          <img src="./images/nao-abrir.jpg" alt="não abrir" class="icone-img">
+          <span class="app-nome">não abrir</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- App: WhatsApp -->
+    <div id="app-whatsapp" class="tela escondida">
+      <header class="wpp-topo">
+        <button type="button" id="wpp-voltar-home" class="app-btn-voltar" title="Voltar">←</button>
+        <img src="./images/contato-ligacao.jpg" alt="Pedro Henrique" class="wpp-avatar">
+        <div class="wpp-contato-info">
+          <strong id="wpp-nome-contato">Pedro Henrique</strong>
+          <span id="wpp-status-contato">online</span>
+        </div>
+      </header>
+
+      <div id="wpp-mensagens" class="wpp-mensagens">
+        <div class="wpp-aviso-dia">Hoje</div>
+
+        <div class="wpp-msg recebida">
+          <p>Chamada de voz • encerrada</p>
+          <span class="wpp-hora">Agora</span>
+        </div>
+      </div>
+
+      <div id="wpp-escolhas" class="wpp-escolhas"></div>
+
+      <form id="wpp-form" class="wpp-barra-envio">
+        <input
+          type="text"
+          id="wpp-input"
+          class="wpp-input"
+          placeholder="Ou digite uma mensagem..."
+          autocomplete="off"
+        >
+        <button type="submit" class="wpp-btn-enviar" title="Enviar">➤</button>
+      </form>
+    </div>
+
+    <!-- App: Instagram -->
+    <div id="app-instagram" class="tela escondida">
+      <header class="ig-topo">
+        <button type="button" id="ig-voltar-home" class="ig-btn-voltar" title="Voltar">←</button>
+        <strong class="ig-logo">Instagram</strong>
+        <span class="ig-coracao-topo">♡</span>
+      </header>
+
+      <div id="ig-aba-feed" class="ig-conteudo">
+        <div id="ig-stories" class="ig-stories"></div>
+        <div id="ig-feed" class="ig-feed"></div>
+      </div>
+
+      <div id="ig-aba-perfil" class="ig-conteudo escondida">
+        <div class="ig-perfil-cabecalho">
+          <img id="ig-perfil-foto" src="./images/contato-ligacao.jpg" alt="Pietra" class="ig-perfil-avatar">
+          <div class="ig-perfil-numeros">
+            <div><strong id="ig-num-posts">3</strong><span>posts</span></div>
+            <div><strong id="ig-num-seguidores">1.482</strong><span>seguidores</span></div>
+            <div><strong id="ig-num-seguindo">419</strong><span>seguindo</span></div>
+          </div>
+        </div>
+
+        <div class="ig-perfil-bio">
+          <strong id="ig-perfil-nome">Pietra Moretti</strong>
+          <p id="ig-perfil-texto">complexada bipolar e ruiva</p>
+        </div>
+
+        <div id="ig-perfil-grade" class="ig-perfil-grade"></div>
+      </div>
+
+      <div id="ig-story-modal" class="ig-story-modal escondida">
+        <div class="ig-story-topo">
+          <div class="ig-story-barra"><div class="ig-story-progresso"></div></div>
+          <div class="ig-story-autor">
+            <img id="ig-story-avatar" src="./images/contato-ligacao.jpg" alt="" class="ig-story-mini">
+            <strong id="ig-story-nome">Pedro Henrique</strong>
+            <button type="button" id="ig-fechar-story" class="ig-fechar-story">✕</button>
+          </div>
+        </div>
+        <img id="ig-story-img" src="./images/contato-ligacao.jpg" alt="Story" class="ig-story-foto">
+        <p id="ig-story-legenda" class="ig-story-legenda"></p>
+      </div>
+
+      <nav class="ig-nav-inferior">
+        <button type="button" id="ig-tab-feed" class="ig-nav-btn ativo" title="Início">⌂</button>
+        <button type="button" id="ig-tab-perfil" class="ig-nav-btn" title="Perfil">👤</button>
+      </nav>
+    </div>
+
+    <!-- App: Chrome / Google -->
+    <div id="app-chrome" class="tela escondida">
+      <header class="chr-topo">
+        <button type="button" id="chr-voltar-home" class="chr-btn-voltar" title="Voltar">←</button>
+        <div class="chr-url-pill">
+          <span class="chr-cadeado">🔒</span>
+          <span class="chr-aba-titulo">google.com</span>
+        </div>
+        <span class="chr-abas-icone">3</span>
+      </header>
+
+      <div class="chr-conteudo">
+        <div class="chr-logo" aria-label="Google">
+          <span class="g-azul">G</span><span class="g-verm">o</span><span class="g-amar">o</span><span class="g-azul">g</span><span class="g-verd">l</span><span class="g-verm">e</span>
+        </div>
+
+        <div class="chr-caixa-pesquisa-completa">
+          <div class="chr-barra-busca">
+            <span class="chr-lupa">🔍</span>
+            <input type="text" id="chr-input-busca" class="chr-input" placeholder="Pesquise ou digite um URL" readonly>
+            <span class="chr-icones-direita">🎙️ 📷</span>
+          </div>
+
+          <div class="chr-dropdown-historico">
+            <p class="chr-historico-titulo">Pesquisas recentes</p>
+            <ul id="chr-lista-pesquisas" class="chr-lista"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- App: Notas -->
+    <div id="app-notas" class="tela escondida">
+      <header class="nts-topo">
+        <button type="button" id="nts-voltar-home" class="nts-btn-voltar" title="Voltar">←</button>
+        <strong class="nts-titulo-barra">Notas</strong>
+      </header>
+
+      <div id="nts-lista-view" class="nts-conteudo">
+        <h2 class="nts-titulo-secao">Notas</h2>
+        <div id="nts-lista" class="nts-lista"></div>
+      </div>
+
+      <div id="nts-detalhe-view" class="nts-conteudo escondida">
+        <button type="button" id="nts-voltar-lista" class="nts-link-voltar">‹ Notas</button>
+        <span id="nts-data" class="nts-data"></span>
+        <h3 id="nts-nota-titulo" class="nts-nota-titulo"></h3>
+        <p id="nts-nota-texto" class="nts-nota-texto"></p>
+      </div>
+    </div>
+
+    <!-- App: não abrir -->
+    <div id="app-nao-abrir" class="tela escondida">
+      <header class="hck-topo">
+        <button type="button" id="hck-voltar-home" class="hck-btn-voltar" title="Voltar">←</button>
+        <span class="hck-status-topo">● ROOT / ACESSO NÃO AUTORIZADO</span>
+      </header>
+
+      <div class="hck-conteudo">
+        <div class="hck-alerta">⚠ SISTEMA INVADIDO</div>
+        <h2 class="hck-titulo">DISPOSITIVO COMPROMETIDO</h2>
+        <p class="hck-sub">Rastreando pacotes de dados... não desconecte.</p>
+
+        <div id="hck-terminal" class="hck-terminal"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
