@@ -1,9 +1,5 @@
- const SENHA_CORRETA = "1234";
+const SENHA_CORRETA = "1011";
 
-/* =========================================================================
-   TEXTOS EDITÁVEIS DA CONVERSA (Pietra x Pedro Henrique)
-   Altere qualquer frase entre aspas aqui e salve o arquivo.
-   ========================================================================= */
 const ROTEIRO_PEDRO_HENRIQUE = {
   turno1: [
     {
@@ -97,17 +93,14 @@ const teclasNum = document.querySelectorAll(".tecla-num");
 const pontos = document.querySelectorAll(".ponto");
 const mensagemSenha = document.getElementById("mensagem-senha");
 
-// Elementos da Ligação
 const ligacaoStatus = document.getElementById("ligacao-status");
 const btnAtender = document.getElementById("btn-atender");
 const btnDesligar = document.getElementById("btn-desligar");
 const audioToque = document.getElementById("audio-toque");
 const audioVoz = document.getElementById("audio-voz");
 
-// Ícones da Tela Inicial
 const iconesApp = document.querySelectorAll(".app-icone");
 
-// Elementos do WhatsApp
 const wppVoltarHome = document.getElementById("wpp-voltar-home");
 const wppMensagens = document.getElementById("wpp-mensagens");
 const wppEscolhas = document.getElementById("wpp-escolhas");
@@ -115,7 +108,6 @@ const wppStatusContato = document.getElementById("wpp-status-contato");
 const wppForm = document.getElementById("wpp-form");
 const wppInput = document.getElementById("wpp-input");
 
-// Player da tela de bloqueio
 const btnPlayPause = document.getElementById("btn-play-pause");
 let tocando = true;
 
@@ -335,12 +327,14 @@ iconesApp.forEach((icone) => {
       telaInicial.classList.add("escondida");
       appChrome.classList.remove("escondida");
       iniciarChrome();
-
-      } else if (icone.dataset.app === "notas" && appNotas) {
+    } else if (icone.dataset.app === "notas" && appNotas) {
       telaInicial.classList.add("escondida");
       appNotas.classList.remove("escondida");
       iniciarNotas();
-    }
+    } else if (icone.dataset.app === "nao-abrir" && appNaoAbrir) {
+      telaInicial.classList.add("escondida");
+      appNaoAbrir.classList.remove("escondida");
+      iniciarNaoAbrir();
     }
   });
 });
@@ -370,10 +364,6 @@ if (btnPlayPause) {
   });
 }
 
-/* =========================================================================
-   CONTEÚDO EDITÁVEL DO INSTAGRAM
-   Altere fotos (caminhos em ./images/), textos e comentários aqui.
-   ========================================================================= */
 const DADOS_INSTAGRAM = {
   perfil: {
     nome: "pietra moretti",
@@ -399,14 +389,12 @@ const DADOS_INSTAGRAM = {
     {
       nome: "Seu story",
       avatar: "./images/foto-perfil.jpg",
-      foto: "./images/story-um.jpg",
-  
+      foto: "./images/story-um.jpg"
     },
     {
       nome: "ph",
       avatar: "./images/perfil-ph.jpg",
-      foto: "./images/story-dois.jpg",
-    
+      foto: "./images/story-dois.jpg"
     }
   ],
 
@@ -458,7 +446,6 @@ function iniciarInstagram() {
   if (instagramIniciado || !appInstagram) return;
   instagramIniciado = true;
 
-  // Renderizar Stories
   DADOS_INSTAGRAM.stories.forEach((story) => {
     const btn = document.createElement("button");
     btn.type = "button";
@@ -474,14 +461,13 @@ function iniciarInstagram() {
       igStoryAvatar.src = story.avatar;
       igStoryNome.textContent = story.nome;
       igStoryImg.src = story.foto;
-      igStoryLegenda.textContent = story.legenda;
+      igStoryLegenda.textContent = story.legenda || "";
       igStoryModal.classList.remove("escondida");
     });
 
     igStories.appendChild(btn);
   });
 
-  // Renderizar Feed
   DADOS_INSTAGRAM.posts.forEach((post) => {
     const article = document.createElement("article");
     article.classList.add("ig-post");
@@ -519,7 +505,6 @@ function iniciarInstagram() {
     igFeed.appendChild(article);
   });
 
-  // Preencher Perfil
   const p = DADOS_INSTAGRAM.perfil;
   document.getElementById("ig-perfil-foto").src = p.foto;
   document.getElementById("ig-perfil-nome").textContent = p.nome;
@@ -565,9 +550,7 @@ if (igVoltarHome && appInstagram) {
     telaInicial.classList.remove("escondida");
   });
 }
-/* =========================================================================
-   PESQUISAS RECENTES DO CHROME (EDITÁVEL)
-   ========================================================================= */
+
 const PESQUISAS_CHROME = [
   "como terminar um namoro sem se sentir culpada",
   "minha namorada é ausente oq fazer",
@@ -579,25 +562,6 @@ const appChrome = document.getElementById("app-chrome");
 const chrListaPesquisas = document.getElementById("chr-lista-pesquisas");
 const chrVoltarHome = document.getElementById("chr-voltar-home");
 let chromeIniciado = false;
-
-function iniciarChrome() {
-  if (chromeIniciado || !chrListaPesquisas) return;
-  chromeIniciado = true;
-
-  PESQUISAS_CHROME.forEach((termo) => {
-    const li = document.createElement("li");
-    li.classList.add("chr-item");
-    li.innerHTML = `<span class="chr-relogio">🕒</span><span>${termo}</span>`;
-    chrListaPesquisas.appendChild(li);
-  });
-}
-
-if (chrVoltarHome && appChrome) {
-  chrVoltarHome.addEventListener("click", () => {
-    appChrome.classList.add("escondida");
-    telaInicial.classList.remove("escondida");
-  });
-}
 
 function iniciarChrome() {
   if (chromeIniciado || !chrListaPesquisas) return;
@@ -622,14 +586,18 @@ function iniciarChrome() {
   });
 }
 
-/* =========================================================================
-   NOTAS DO CELULAR (EDITÁVEL)
-   ========================================================================= */
+if (chrVoltarHome && appChrome) {
+  chrVoltarHome.addEventListener("click", () => {
+    appChrome.classList.add("escondida");
+    telaInicial.classList.remove("escondida");
+  });
+}
+
 const NOTAS_CELULAR = [
   {
     titulo: "Pra você",
     data: "Hoje às 03:12",
-    texto: "Eu não sei disfarçar quando o assunto é você. Pode fingir que tá tudo normal, mas a gente sabe o que ficou no ar."
+    texto: "eu sei que não sou bom c textos mas so queria que voce soubesse que pra mim tu vale a pena pra crl, nao gosto de te ver sofrendo e se diminuindo pq voce é uma garota incrivel em todos os aspectos. espero conseguir fazer voce se enxergar como eu te vejo. sempre vou estar aq por ti tlgd nisso ne, tmj até o fim. te amo"
   }
 ];
 
@@ -676,6 +644,39 @@ if (ntsVoltarLista) {
 if (ntsVoltarHome && appNotas) {
   ntsVoltarHome.addEventListener("click", () => {
     appNotas.classList.add("escondida");
+    telaInicial.classList.remove("escondida");
+  });
+}
+
+const LINHAS_HACK = [
+  { texto: "> iniciando varredura no sistema...", erro: false },
+  { texto: "> bypass firewall: OK", erro: false },
+  { texto: "> interceptando sessões ativas...", erro: false },
+  { texto: "! ALERTA: acesso remoto detectado na rede", erro: true },
+  { texto: "> copiando registros de mensagens...", erro: false },
+  { texto: "! AVISO: você abriu o que não devia.", erro: true }
+];
+
+const appNaoAbrir = document.getElementById("app-nao-abrir");
+const hckTerminal = document.getElementById("hck-terminal");
+const hckVoltarHome = document.getElementById("hck-voltar-home");
+let hackIniciado = false;
+
+function iniciarNaoAbrir() {
+  if (hackIniciado || !hckTerminal) return;
+  hackIniciado = true;
+
+  LINHAS_HACK.forEach((item) => {
+    const p = document.createElement("p");
+    p.textContent = item.texto;
+    if (item.erro) p.classList.add("hck-linha-erro");
+    hckTerminal.appendChild(p);
+  });
+}
+
+if (hckVoltarHome && appNaoAbrir) {
+  hckVoltarHome.addEventListener("click", () => {
+    appNaoAbrir.classList.add("escondida");
     telaInicial.classList.remove("escondida");
   });
 }
